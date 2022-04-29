@@ -1,16 +1,27 @@
 # todo
 
-A new Flutter project.
+A Todo Flutter Applicatioin.
 
-## Getting Started
+## ChangeNotifierProvider and ChangeNotifierProxyProvider
 
-This project is a starting point for a Flutter application.
+This project is a project to show the usage of provider package to handle state in flutter application.
+we first use the couple ChangeNotifierProvider & ChangeNotifierProxyProvider. Doing this we create:
 
-A few resources to get you started if this is your first Flutter project:
+- TodoListState and TodoListProvider
+- TodoFilter and TodoFilterProvider
+- SearchTodoState and SearchTodoProvider
+- ActiveTodoCountState and ActiveTodoCountProvider
+- FilteredTodoState and FilteredTodoProvider
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+The concept here is to create a state, a create a provider to update the state.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+after create a state a provider, we then inject it in our application root widget tree using:
+- Multyprovider widget
+- ChangeNotifierProvider
+- ChangeNotifierProxyProvider
+
+As our state are present in the application root widget tree, we can access the using:
+- context.watch went we need the widget to reload when the value change
+- context.listen
+- context.read 
+
