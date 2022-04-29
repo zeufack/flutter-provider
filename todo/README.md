@@ -16,7 +16,7 @@ we first use the couple ChangeNotifierProvider & ChangeNotifierProxyProvider. Do
 The concept here is to create a state, a create a provider to update the state.
 
 after create a state a provider, we then inject it in our application root widget tree using:
-- Multyprovider widget
+- Multiprovider widget
 - ChangeNotifierProvider
 - ChangeNotifierProxyProvider
 
