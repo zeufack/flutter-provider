@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo/components/filter_todo_component.dart';
+import 'package:todo/components/show_todo_component.dart';
 import 'package:todo/components/todo_header_component.dart';
 import 'package:todo/components/todo_create_component.dart';
 
@@ -15,7 +17,18 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
           child: Center(
             child: Column(
-              children: const [TodoHeaderComponent(), CreateTodoComponent()],
+              children: const [
+                TodoHeaderComponent(),
+                CreateTodoComponent(),
+                SizedBox(
+                  height: 18.0,
+                ),
+                FilterTodoComponent(),
+                SizedBox(
+                  height: 18.0,
+                ),
+                ShowTodoComponent(),
+              ],
             ),
           ),
         ),
