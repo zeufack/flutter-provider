@@ -17,17 +17,17 @@ class HomeScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 40.0),
           child: Center(
             child: Column(
-              children: const [
-                TodoHeaderComponent(),
-                CreateTodoComponent(),
-                SizedBox(
+              children: [
+                const TodoHeaderComponent(),
+                const CreateTodoComponent(),
+                const SizedBox(
                   height: 18.0,
                 ),
                 FilterTodoComponent(),
-                SizedBox(
+                const SizedBox(
                   height: 18.0,
                 ),
-                ShowTodoComponent(),
+                const ShowTodoComponent(),
               ],
             ),
           ),

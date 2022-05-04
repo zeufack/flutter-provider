@@ -19,13 +19,18 @@ class TodoApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<TodoListProvider>(
-            create: (context) => TodoListProvider()),
+          create: (context) => TodoListProvider(),
+        ),
         ChangeNotifierProvider<TodoFilterProvider>(
-            create: (context) => TodoFilterProvider()),
+          create: (context) => TodoFilterProvider(),
+        ),
         ChangeNotifierProvider<TodoSearchProvider>(
-            create: (context) => TodoSearchProvider()),
+          create: (context) => TodoSearchProvider(),
+        ),
         ChangeNotifierProxyProvider<TodoListProvider, TodoActiveCountProvider>(
-          create: (context) => TodoActiveCountProvider(),
+          create: (context) => TodoActiveCountProvider(
+              initalActiveTodoCount:
+                  context.read<TodoListProvider>().state.todoList.length),
           update: (BuildContext context, TodoListProvider todoListProvider,
                   TodoActiveCountProvider? todoActiveCountProvider) =>
               todoActiveCountProvider!..update(todoListProvider),

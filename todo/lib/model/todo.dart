@@ -4,16 +4,21 @@ import 'package:uuid/uuid.dart';
 const uuid = Uuid();
 
 class Todo extends Equatable {
-  String id;
-  String desc;
-  bool completed;
+  final String id;
+  final String desc;
+  final bool completed;
 
   Todo({
     String? id,
     required this.desc,
-    bool? completed,
-  })  : id = id ?? uuid.v4(),
-        completed = false;
+    this.completed = false,
+  }) : id = id ?? uuid.v4();
+
+  @override
+  String toString() => 'Todo(id: $id, desc: $desc, completed: $completed)';
+
+  @override
+  List<Object> get props => [id, desc, completed];
 
   Todo copyWith({
     String? id,
@@ -26,10 +31,4 @@ class Todo extends Equatable {
       completed: completed ?? this.completed,
     );
   }
-
-  @override
-  String toString() => 'Todo(id: $id, desc: $desc, completed: $completed)';
-
-  @override
-  List<Object> get props => [id, desc, completed];
 }

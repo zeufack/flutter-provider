@@ -3,10 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:todo/model/filter.dart';
 import 'package:todo/providers/todo_filter/todo_filter_provider.dart';
 import 'package:todo/providers/todo_search/todo_search_provider.dart';
+import 'package:todo/utils/debounce.dart';
 
 class FilterTodoComponent extends StatelessWidget {
-  const FilterTodoComponent({Key? key}) : super(key: key);
-
+  FilterTodoComponent({Key? key}) : super(key: key);
+  final debounce = Debounce(millisecons: 1000);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -19,7 +20,9 @@ class FilterTodoComponent extends StatelessWidget {
               filled: true),
           onChanged: (searchTerm) {
             if (searchTerm != null) {
-              context.read<TodoSearchProvider>().changeSearchTerm(searchTerm);
+              debounce.run(() {
+                context.read<TodoSearchProvider>().changeSearchTerm(searchTerm);
+              });
             }
           },
         ),
