@@ -27,25 +27,27 @@ class TodoApp extends StatelessWidget {
         ChangeNotifierProvider<TodoSearchProvider>(
           create: (context) => TodoSearchProvider(),
         ),
-        ChangeNotifierProxyProvider<TodoListProvider, TodoActiveCountProvider>(
-          create: (context) => TodoActiveCountProvider(
-              initalActiveTodoCount:
-                  context.read<TodoListProvider>().state.todoList.length),
-          update: (BuildContext context, TodoListProvider todoListProvider,
-                  TodoActiveCountProvider? todoActiveCountProvider) =>
-              todoActiveCountProvider!..update(todoListProvider),
+        ProxyProvider<TodoListProvider, TodoActiveCountProvider>(
+          update: (
+            BuildContext context,
+            TodoListProvider todoListProvider,
+            TodoActiveCountProvider? _,
+          ) =>
+              TodoActiveCountProvider(
+            todoList: todoListProvider,
+          ),
         ),
-        ChangeNotifierProxyProvider3<TodoListProvider, TodoSearchProvider,
-            TodoFilterProvider, FilteredTodoProvider>(
-          create: (context) => FilteredTodoProvider(),
-          update: (BuildContext context,
-                  TodoListProvider todoListProvider,
-                  TodoSearchProvider todoSearchProvider,
+        ProxyProvider3<TodoFilterProvider, TodoSearchProvider, TodoListProvider,
+            FilteredTodoProvider>(
+          update: ((context,
                   TodoFilterProvider todoFilterProvider,
-                  FilteredTodoProvider? filteredTodoProvider) =>
-              filteredTodoProvider!
-                ..update(
-                    todoFilterProvider, todoListProvider, todoSearchProvider),
+                  TodoSearchProvider todoSearchProvider,
+                  TodoListProvider todoListProvider,
+                  FilteredTodoProvider? _) =>
+              FilteredTodoProvider(
+                  todoListProvider: todoListProvider,
+                  todoFilterProvider: todoFilterProvider,
+                  todoSearchProvider: todoSearchProvider)),
         ),
       ],
       child: MaterialApp(

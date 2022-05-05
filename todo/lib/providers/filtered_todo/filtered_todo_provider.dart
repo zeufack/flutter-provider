@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+
 import 'package:todo/model/filter.dart';
 import 'package:todo/model/todo.dart';
 import 'package:todo/providers/filtered_todo/filtered_todo_state.dart';
@@ -7,14 +8,17 @@ import 'package:todo/providers/todo_list/todo_list_provider.dart';
 import 'package:todo/providers/todo_search/todo_search_provider.dart';
 
 class FilteredTodoProvider with ChangeNotifier {
-  FilteredTodoState _state = FilteredTodoState.initial();
+  final TodoListProvider todoListProvider;
+  final TodoFilterProvider todoFilterProvider;
+  final TodoSearchProvider todoSearchProvider;
 
-  FilteredTodoState get state => _state;
+  FilteredTodoProvider({
+    required this.todoListProvider,
+    required this.todoFilterProvider,
+    required this.todoSearchProvider,
+  });
 
-  void update(
-      TodoFilterProvider todoFilterProvider,
-      TodoListProvider todoListProvider,
-      TodoSearchProvider todoSearchProvider) {
+  FilteredTodoState get state {
     List<Todo> _filteredTodos;
     switch (todoFilterProvider.state.filter) {
       case Filter.all:
@@ -44,7 +48,6 @@ class FilteredTodoProvider with ChangeNotifier {
           .toList();
     }
 
-    _state = _state.copyWith(filteredTodoList: _filteredTodos);
-    notifyListeners();
+    return FilteredTodoState(filteredTodoList: _filteredTodos);
   }
 }

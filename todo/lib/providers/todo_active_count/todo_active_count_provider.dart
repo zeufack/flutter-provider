@@ -1,26 +1,16 @@
-import 'package:flutter/cupertino.dart';
-
 import 'package:todo/providers/todo_active_count/todo_active_count_state.dart';
 import 'package:todo/providers/todo_list/todo_list_provider.dart';
 
-class TodoActiveCountProvider with ChangeNotifier {
-  final int initalActiveTodoCount;
-  late TodoActiveCountState _state;
-
+class TodoActiveCountProvider {
+  // Remove ChangeNotifier and get todolist in the controller
+  final TodoListProvider todoList;
   TodoActiveCountProvider({
-    required this.initalActiveTodoCount,
-  }) {
-    _state = TodoActiveCountState(activeTodoCount: initalActiveTodoCount);
-  }
+    required this.todoList,
+  });
 
-  TodoActiveCountState get state => _state;
-
-  void update(TodoListProvider todoList) {
-    final activeTodoCount = todoList.state.todoList
-        .where((todo) => !todo.completed)
-        .toList()
-        .length;
-    _state = _state.copyWith(activeTodoCount: activeTodoCount);
-    notifyListeners();
-  }
+  TodoActiveCountState get state => TodoActiveCountState(
+      activeTodoCount: todoList.state.todoList
+          .where((todo) => !todo.completed)
+          .toList()
+          .length);
 }
