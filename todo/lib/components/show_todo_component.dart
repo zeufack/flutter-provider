@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:todo/components/todo_item_component.dart';
 import 'package:todo/model/todo.dart';
 import 'package:todo/providers/filtered_todo/filtered_todo_provider.dart';
+import 'package:todo/providers/filtered_todo/filtered_todo_state.dart';
 import 'package:todo/providers/todo_list/todo_list_provider.dart';
 
 class ShowTodoComponent extends StatelessWidget {
@@ -11,7 +12,7 @@ class ShowTodoComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<Todo> filteredTodoList =
-        context.watch<FilteredTodoProvider>().state.filteredTodoList;
+        context.watch<FilteredTodoState>().filteredTodoList;
 
     return ListView.separated(
       itemCount: filteredTodoList.length,

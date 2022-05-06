@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todo/model/filter.dart';
 import 'package:todo/providers/todo_filter/todo_filter_provider.dart';
+import 'package:todo/providers/todo_filter/todo_filter_state.dart';
 import 'package:todo/providers/todo_search/todo_search_provider.dart';
 import 'package:todo/utils/debounce.dart';
 
@@ -61,7 +62,7 @@ class FilterTodoComponent extends StatelessWidget {
   }
 
   Color filterBUttonColor(BuildContext context, Filter filter) {
-    return context.watch<TodoFilterProvider>().state.filter == filter
+    return context.watch<TodoFilterState>().filter == filter
         ? Colors.blue
         : Colors.grey;
   }
